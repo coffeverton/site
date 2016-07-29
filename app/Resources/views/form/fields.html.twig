@@ -1,0 +1,10 @@
+{# app/Resources/views/form/fields.html.twig #}
+{% block form_row %}
+{% spaceless %}
+    <div class="input-group form-row">
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+    </div>
+{% endspaceless %}
+{% endblock form_row %}

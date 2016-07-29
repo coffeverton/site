@@ -1,0 +1,38 @@
+{% extends 'painel.html.twig' %}
+
+{% block body %}
+    <div class="page-header">
+        <h1>Categorias</h1>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Listando Categorias</div>
+        <div class="panel-body">
+            <a href="{{ path('painel_categoria_new') }}" class="btn btn-success">Criar Nova</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Chave</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for categorium in categorias %}
+                <tr>
+                    <td><a href="{{ path('painel_categoria_show', { 'id': categorium.id }) }}">{{ categorium.id }}</a></td>
+                    <td>{{ categorium.nome }}</td>
+                    <td>{{ categorium.chave }}</td>
+                    <td>
+                        <a href="{{ path('painel_categoria_show', { 'id': categorium.id }) }}" class="btn btn-primary">Ver</a>
+                        <a href="{{ path('painel_categoria_edit', { 'id': categorium.id }) }}" class="btn btn-success">Editar</a>
+                        <a href="{{ path('painel_categoria_delete', { 'id': categorium.id }) }}" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

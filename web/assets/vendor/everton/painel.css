@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26/07/2016, 17:36:58
+    Author     : everton
+*/
+
+ul.acoes{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+ul.acoes li{
+    display: inline-block;
+}
+
+.form-row{
+    margin-bottom: 20px;
+}
+
+.formulario form{
+    padding: 20px;
+}
+
+.formulario textarea{
+    width: 500px;
+    height: 150px;
+    font-size: 18px;
+}
+
+#tinymce p{
+    font-size: 18px;
+    
+}

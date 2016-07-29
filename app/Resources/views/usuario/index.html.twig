@@ -1,0 +1,48 @@
+{% extends 'painel.html.twig' %}
+
+{% block body %}
+    <div class="page-header">
+        <h1>Usuarios</h1>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Listando Usuarios</div>
+        <div class="panel-body">
+            <a href="{{ path('painel_usuario_new') }}" class="btn btn-success">Criar Novo</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Usuario</th>
+                    <th>Email</th>
+                    <th>Ativo</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td><a href="{{ path('painel_usuario_show', { 'id': usuario.id }) }}">{{ usuario.id }}</a></td>
+                    <td>{{ usuario.usuario }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{% if usuario.ativo %}Yes{% else %}No{% endif %}</td>
+                    <td>
+                        <ul class="acoes">
+                            <li>
+                                <a href="{{ path('painel_usuario_show', { 'id': usuario.id }) }}" class="btn btn-primary">Ver</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('painel_usuario_edit', { 'id': usuario.id }) }}" class="btn btn-success">Editar</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('painel_usuario_edit', { 'id': usuario.id }) }}" class="btn btn-danger">Excluir</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

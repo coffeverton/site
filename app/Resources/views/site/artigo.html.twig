@@ -1,0 +1,11 @@
+<article class="conteudo">
+    <header>
+        <h2>
+            <a href="{{ path('site_show', { 'chave': conteudo.chave }) }}">{{ conteudo.titulo }}</a>
+        </h2>
+    </header>
+    <div class="conteudo">{{ conteudo.conteudo | raw }}</div>
+    <footer>
+        <time datetime="{{conteudo.data|date('Y-m-dTH:i')}}">{{ conteudo.data|date('d/m/y H:i') }}</time>
+    </footer>
+</article>

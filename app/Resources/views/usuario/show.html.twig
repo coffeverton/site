@@ -1,0 +1,44 @@
+{% extends 'painel.html.twig' %}
+
+{% block body %}
+    <div class="page-header">
+        <h1>Usuarios</h1>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Visualizando Usuario</div>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ usuario.id }}</td>
+                </tr>
+                <tr>
+                    <th>Usuario</th>
+                    <td>{{ usuario.usuario }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ usuario.email }}</td>
+                </tr>
+                <tr>
+                    <th>Ativo</th>
+                    <td>{% if usuario.ativo %}Yes{% else %}No{% endif %}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    <ul class="acoes">
+        <li>
+            <a href="{{ path('painel_usuario_index') }}" class="btn btn-primary">Voltar</a>
+        </li>
+        <li>
+            <a href="{{ path('painel_usuario_edit', { 'id': usuario.id }) }}" class="btn btn-success">Editar</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Excluir"  class="btn btn-danger">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

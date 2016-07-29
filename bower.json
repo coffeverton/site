@@ -1,0 +1,11 @@
+{
+    "name": "site",
+    "authors": [
+        "Beelab <info@bee-lab.net>",
+        "Everton Pereira <coffeverton@gmail.com>"
+    ],
+    "private": true,
+    "dependencies": {
+        "bootstrap": "*"
+    }
+}

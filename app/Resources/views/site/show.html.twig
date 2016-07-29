@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section id="conteudo">
+        <header>
+            <h2>Conteudo</h2>
+        </header>
+        {% include 'site/artigo.html.twig' with {'conteudo': conteudo} %}
+        <footer>
+            <nav>
+                <a href="{{ app.request.headers.get('referer') }}">Voltar</a>
+            </nav>
+        </footer>
+    </section>
+{% endblock %}

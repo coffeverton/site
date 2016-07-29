@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Site Sem Nome{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/vendor/everton/site.css') }}">
+    </head>
+    <body>
+        <section id="site">
+            <nav id="navegacao_topo">
+                <ul>
+                    <li><a href="{{ path('site_index') }}">Inicio</a></li>
+                </ul>
+            </nav>
+            {% block body %}{% endblock %}
+            <nav id="navegacao_rodape">
+                <ul>
+                    <li><a href="{{ path('site_index') }}">Inicio</a></li>
+                </ul>
+            </nav>
+            {% block javascripts %}{% endblock %}
+        </section>
+    </body>
+</html>

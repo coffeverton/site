@@ -1,0 +1,10 @@
+{# app/Resources/views/registration/register.html.twig #}
+
+{{ form_start(form) }}
+    {{ form_row(form.usuario) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.senhaTxt.first) }}
+    {{ form_row(form.senhaTxt.second) }}
+
+    <button type="submit">Registrar!</button>
+{{ form_end(form) }}
