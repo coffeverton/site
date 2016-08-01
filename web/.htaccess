@@ -5,15 +5,11 @@ AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javasc
 # enable expirations
 ExpiresActive On
 # expire GIF images after a month in the client's cache
-ExpiresByType image/* "access plus 30 days"
-ExpiresByType text/javascript "access plus 30 days"
-ExpiresByType text/plain"access plus 30 days"
-ExpiresByType text/css "access plus 30 days"
-ExpiresByType application/javascript "access plus 30 days"
-# HTML documents are good for a week from the
-# time they were changed
-ExpiresByType text/html "access plus 7 days"
-
+ExpiresByType image/gif A2592000
+# expire text css/javascript after a month of modified time
+ExpiresByType text/css M2592000
+ExpiresByType text/javascript M2592000
+ExpiresByType application/javascript M2592000
 
 
 # Use the front controller as index file. It serves as a fallback solution when
