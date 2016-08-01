@@ -3,13 +3,13 @@ AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javasc
 
 #cache do navegador
 # enable expirations
-ExpiresActive On
+#ExpiresActive On
 # expire GIF images after a month in the client's cache
-ExpiresByType image/gif A2592000
+#ExpiresByType image/gif A2592000
 # expire text css/javascript after a month of modified time
-ExpiresByType text/css M2592000
-ExpiresByType text/javascript M2592000
-ExpiresByType application/javascript M2592000
+#ExpiresByType text/css M2592000
+#ExpiresByType text/javascript M2592000
+#ExpiresByType application/javascript M2592000
 
 
 # Use the front controller as index file. It serves as a fallback solution when
