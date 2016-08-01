@@ -1,11 +1,11 @@
-<article class="conteudo">
+<article class="conteudo" itemscope itemtype="http://schema.org/Article">
     <header>
         <h2>
-            <a href="{{ path('site_show', { 'chave': conteudo.chave }) }}">{{ conteudo.titulo }}</a>
+            <a href="{{ path('site_show', { 'chave': conteudo.chave }) }}" itemprop="url">{{ conteudo.titulo }}</a>
         </h2>
     </header>
-    <div class="conteudo">{{ conteudo.conteudo | raw }}</div>
+    <div class="conteudo" itemprop="articleBody">{{ conteudo.conteudo | raw }}</div>
     <footer>
-        <time datetime="{{conteudo.data|date('Y-m-dTH:i')}}">{{ conteudo.data|date('d/m/y H:i') }}</time>
+        <time datetime="{{conteudo.data|date('Y-m-dTH:i')}}" itemprop="datePublished">{{ conteudo.data|date('d/m/y H:i') }}</time>
     </footer>
 </article>
