@@ -9,12 +9,26 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="canonical" href="{{ app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo }}" />
         <script type="application/ld+json">
-            { 
-              "@context": "http://schema.org",
-              "@type": "NewsArticle",
-              "headline": "Site sem nome",
-              "datePublished": "2016-09-01T19:02:41Z",
+        { 
+            "@context": "http://schema.org",
+            "@type": "NewsArticle",
+            "headline": "Site sem nome",
+            "datePublished": "2016-09-01T19:02:41Z",
+            "author": {
+                "@type": "Person",
+                "name": "Everton Pereira"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Everton Corp.",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://lh3.googleusercontent.com/-ZhY13FFX6hI/AAAAAAAAAAI/AAAAAAAAAAA/AOkcYIunbXE0iFewlUtt9V9Yo3MU56djLg/s32-c-mo/photo.jpg",
+                    "width": 32,
+                    "height": 32
+                }
             }
+        }
         </script>
     </head>
     <body>
