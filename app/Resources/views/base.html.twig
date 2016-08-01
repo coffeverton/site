@@ -6,8 +6,6 @@
         <title>{% block title %}Site Sem Nome{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/vendor/everton/site.css') }}">
     </head>
     <body>
         <section id="site">
@@ -24,5 +22,7 @@
             </nav>
             {% block javascripts %}{% endblock %}
         </section>
+        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/vendor/everton/site.css') }}">
     </body>
 </html>
