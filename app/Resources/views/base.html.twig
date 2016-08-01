@@ -3,9 +3,19 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ff0000" />
         <title>{% block title %}Site Sem Nome{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="canonical" href="{{ app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo }}" />
+        <script type="application/ld+json">
+            { 
+              "@context": "http://schema.org",
+              "@type": "NewsArticle",
+              "headline": "Site sem nome",
+              "datePublished": "2016-09-01T19:02:41Z",
+            }
+        </script>
     </head>
     <body>
         <section id="site">
