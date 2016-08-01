@@ -1,4 +1,15 @@
+#compressao
 AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+
+#cache do navegador
+# enable expirations
+ExpiresActive On
+# expire GIF images after a month in the client's cache
+ExpiresByType image/* "access plus 30 days"
+# HTML documents are good for a week from the
+# time they were changed
+ExpiresByType text/html "access plus 7 days"
+
 
 
 # Use the front controller as index file. It serves as a fallback solution when
