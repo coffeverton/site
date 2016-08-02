@@ -6,7 +6,7 @@
         <meta name="theme-color" content="#666666" />
         <title>{% block title %}Site Sem Nome{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('assets/vendor/everton/imagens/favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ app.request.getSchemeAndHttpHost ~ asset('assets/vendor/everton/imagens/favicon.ico') }}" />
         <link rel="canonical" href="{{ app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo }}" />
         <script type="application/ld+json">
         {
@@ -14,13 +14,13 @@
             "@type": "WebSite",
             "name": "Site do Everton",
             "alternateName": "O site do Everton",
-            "url": "{{app.request.baseUrl}}"
+            "url": "{{app.request.getSchemeAndHttpHost}}"
         }
         {
             "@context": "http://schema.org",
             "@type": "Organization",
-            "url": "{{app.request.baseUrl}}",
-            "logo": "{{ asset('assets/vendor/everton/imagens/logo.png')}}"
+            "url": "{{app.request.getSchemeAndHttpHost}}",
+            "logo": "{{ app.request.getSchemeAndHttpHost ~asset('assets/vendor/everton/imagens/logo.png')}}"
         }
         {
           "@context": "http://schema.org",
