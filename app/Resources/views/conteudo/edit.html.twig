@@ -47,5 +47,12 @@ tinymce.init({
     image_advtab: true,
     content_css : "{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css')}},{{ asset('assets/vendor/everton/tinymce.css') }}" 
  });
+ 
+ $(function(){
+    $('#conteudo_titulo').change(function(){
+        var titulo = $(this).val().toLowerCase();
+        $('#conteudo_chave').val(titulo);
+    });
+ });
 </script>
 {% endblock %}

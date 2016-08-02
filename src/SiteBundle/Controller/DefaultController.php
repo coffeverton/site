@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use SiteBundle\Entity\Conteudo;
+use SiteBundle\Entity\Categoria;
 
 
 class DefaultController extends Controller
@@ -15,12 +16,13 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="site_index")
      * @Route("/pagina/{pagina}", name="site_index_paginacao")
+     * @Route("/categoria/{categoria}", name="site_index_categoria")
      */
-    public function indexAction($pagina = 1)
+    public function indexAction($pagina = 1, $categoria = '')
     {
         $limit = 20;
         $em = $this->getDoctrine()->getManager();
-        $conteudos = $em->getRepository('SiteBundle:Conteudo')->getAllConteudo($pagina, $limit); // Returns 5 conteudos out of 20
+        $conteudos = $em->getRepository('SiteBundle:Conteudo')->getAllConteudo($pagina, $limit, $categoria); // Returns 5 conteudos out of 20
 
         // You can also call the count methods (check PHPDoc for `paginate()`)
         # Total fetched (ie: `5` conteudos)
@@ -31,9 +33,11 @@ class DefaultController extends Controller
 
         $maxPaginas = ceil($totalConteudos / $limit);
         $estaPagina = $pagina;
-        // Pass through the 3 above variables to calculate pages in twig
+        
+        $categorias = $em->getRepository('SiteBundle:Categoria')->findAll();
         return $this->render('site/index.html.twig',array(
                 'conteudos' => $conteudos
+                ,'categorias' => $categorias
                 ,'maxPaginas' => $maxPaginas
                 ,'estaPagina' => $estaPagina
                 ,'totalConteudosRetornados' => $totalConteudosRetornados

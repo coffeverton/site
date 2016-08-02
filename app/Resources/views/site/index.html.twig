@@ -2,14 +2,14 @@
 
 {% block body %}
     {% if totalConteudosRetornados > 0%}
-    <h2>Conteudo</h2>
+    <h2>&Uacute;ltimos Conte&uacute;dos</h2>
     <section id="conteudos">
         {% for conteudo in conteudos %}
             {% include 'site/artigo.html.twig' with {'conteudo': conteudo} %}
         {% endfor %}
     </section>
     {% else %}
-    <h2>Tem nada aqui nao.</h2>
+    <h2>Tem nada aqui n&atilde;o.</h2>
     {% endif %}
 
     {% if maxPaginas > 1 %}

@@ -6,36 +6,47 @@
         <meta name="theme-color" content="#666666" />
         <title>{% block title %}Site Sem Nome{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('assets/vendor/everton/imagens/favicon.ico') }}" />
         <link rel="canonical" href="{{ app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo }}" />
         <script type="application/ld+json">
-        { 
+        {
             "@context": "http://schema.org",
-            "@type": "NewsArticle",
-            "headline": "Site sem nome",
-            "datePublished": "2016-09-01T19:02:41Z",
-            "author": {
-                "@type": "Person",
-                "name": "Everton Pereira"
-            },
-            "publisher": {
-                "@type": "Organization",
-                "name": "Everton Corp.",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://lh3.googleusercontent.com/-ZhY13FFX6hI/AAAAAAAAAAI/AAAAAAAAAAA/AOkcYIunbXE0iFewlUtt9V9Yo3MU56djLg/s32-c-mo/photo.jpg",
-                    "width": 32,
-                    "height": 32
-                }
-            }
+            "@type": "WebSite",
+            "name": "Site do Everton",
+            "alternateName": "O site do Everton",
+            "url": "{{app.request.baseUrl}}"
         }
+        {
+            "@context": "http://schema.org",
+            "@type": "Organization",
+            "url": "{{app.request.baseUrl}}",
+            "logo": "{{ asset('assets/vendor/everton/imagens/logo.png')}}"
+        }
+        {
+          "@context": "http://schema.org",
+          "@type": "Person",
+          "name": "Everton Pereira",
+          "url": "{{app.request.baseUrl}}",
+          "sameAs": [
+            "https://github.com/coffeverton",
+            "https://about.me/coffeverton",
+            "http://coffeverton.blogspot.com.br",
+            "http://www.last.fm/user/coffeverton",
+            "http://www.linkedin.com/in/coffeverton",
+            "https://plus.google.com/u/0/+EvertonAmaralPereira0"
+          ]
+        }
+
         </script>
     </head>
     <body>
         <section id="site">
             <nav id="navegacao_topo">
                 <ul>
-                    <li><a href="{{ path('site_index') }}">Inicio</a></li>
+                    <li><a class="inicio" href="{{ path('site_index') }}">Inicio</a></li>
+                    {% for categoria in categorias %}
+                    <li><a class="categorias" href="{{ path('site_index_categoria', {categoria:categoria.chave}) }}">{{categoria.nome}}</a></li>
+                    {% endfor %}
                 </ul>
             </nav>
             {% block body %}{% endblock %}

@@ -23,12 +23,21 @@ class ConteudoRepository extends \Doctrine\ORM\EntityRepository
     *
     * @return \Doctrine\ORM\Tools\Pagination\Paginator
     */
-    public function getAllConteudo($pagina = 1, $limit = 5)
+    public function getAllConteudo($pagina = 1, $limit = 5, $categoria = '')
     {
         // Create our query
-        $query = $this->createQueryBuilder('p')
-            ->orderBy('p.id', 'DESC')
-            ->getQuery();
+        $builder = $this->createQueryBuilder('p')
+                ->leftJoin('p.categoria', 'categoria')
+                ->orderBy('p.id', 'DESC');
+        
+        if($categoria <> '')
+        {
+            $builder
+                ->where('categoria.chave = :categoria')
+                ->setParameter('categoria', $categoria);
+        }
+        
+        $query      = $builder->getQuery();
 
         // No need to manually get the result ($query->getResult())
 

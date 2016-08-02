@@ -21,7 +21,7 @@ class ConteudoType extends AbstractType
         $builder
             ->add('titulo')
             ->add('chave')
-            ->add('conteudo', TextareaType::class)
+            ->add('conteudo', TextareaType::class, array('required' => false))
             ->add('ativo')
             ->add('categoria')
             ->add('data', DateTimeType::class, array(
