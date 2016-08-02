@@ -7,6 +7,12 @@
     <div class="conteudo" itemprop="articleBody">{{ conteudo.conteudo | raw }}</div>
     <footer>
         <time datetime="{{conteudo.data|date('Y-m-dTH:i')}}" itemprop="datePublished">{{ conteudo.data|date('d/m/y H:i') }}</time>
+        <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+            Por <span itemprop="name">Everton Amaral Pereira</span>
+        </span>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Everton Corp.">
+        </div>
+        
     </footer>
-    
 </article>
