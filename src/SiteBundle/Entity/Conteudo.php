@@ -70,6 +70,7 @@ class Conteudo
     
     private function formatarChave($chave)
     {
+        $chave = strtolower($chave);
         $chave = preg_replace("/[ ]{1,}/", "-", trim($chave));
         $chave = preg_replace('/[^a-z0-9\-_]/', '', $chave);
         $chave = preg_replace("/-$/", "", $chave);

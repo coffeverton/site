@@ -7,7 +7,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
 use SiteBundle\Entity\Conteudo;
@@ -36,18 +35,30 @@ class BlogspotImportarCommand extends ContainerAwareCommand
             // ...
         }*/
         
-        $em = $this->getDoctrine()->getManager();
+        $conteudo = new Conteudo();
+        // 1) get the real class for the entity with the Doctrine Utility.
+        $class = \Doctrine\Common\Util\ClassUtils::getRealClass(get_class(new Conteudo));
+        unset($conteudo);
+
+        // 2) get the manager for that class. 
+        $container = $this->getContainer();
+        $em = $container->get('doctrine')->getManagerForClass($class);
         
         $posts = $this->buscar();
         
-        foreach($posts as $post)
+        foreach($posts->items as $post)
         {
+            $data = new \DateTime($post->published);
+            
             $conteudo = new Conteudo();
-            $conteudo->setData($post->published);
+            $conteudo->setData($data);
             $conteudo->setTitulo($post->title);
             $conteudo->setChave($post->title);
             $conteudo->setConteudo($post->content);
             $conteudo->setAtivo(1);
+            
+            $em->persist($conteudo);
+            $em->flush();
         }
 
 //        $output->writeln('Command result.');
