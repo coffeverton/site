@@ -51,13 +51,16 @@ class BlogspotImportarCommand extends ContainerAwareCommand
         
         $posts = $this->buscar();
         
+        $encontrados = 0;
+        $categorias = 0;
+        $conteudos = 0;
         foreach($posts->items as $post)
         {
-            
+            $encontrados++;
             $data = new \DateTime($post->published);
             
             $conteudo = new Conteudo();
-            $categoria = new Categoria();
+            $categoria_tmp = new Categoria();
             
             $conteudo->setData($data);
             $conteudo->setTitulo($post->title);
@@ -67,48 +70,46 @@ class BlogspotImportarCommand extends ContainerAwareCommand
             
             $existe_conteudo = $conteudo_repository->findOneByChave($conteudo->getChave());
             
-            foreach($post->labels as $label)
+            if(!$existe_conteudo)
             {
-                echo "verificando {$label}:\r\n";
-                $categoria->setChave($label);
-                $existe_categoria = $categoria_repository->findOneByChave($categoria->getChave());
-                
-                if(!$existe_categoria)
+                foreach($post->labels as $label)
                 {
-                    $categoria->setNome($label);
-                    $em->persist($categoria);
-                    $em->flush();
-                    echo "cadastrando{$label}:\r\n";
-                } else {
-                    echo "ja existe {$label}:\r\n";
+                    $label = $categoria_tmp->formatarChave($label);
+                    $existe_categoria = $categoria_repository->findOneByChave($label);
+
+                    if(!$existe_categoria)
+                    {
+                        $categoria = new Categoria;
+                        $categoria->setChave($label);
+                        $categoria->setNome($label);
+                        $em->persist($categoria);
+                        $em->flush();
+                        $categorias++;
+                        $categoria = $categoria_repository->findOneByChave($label);
+                    } else {
+                        $categoria = $existe_categoria;
+                    }
                 }
-            }
-            
-            if(!$existe_conteudo){
                 
-                if($existe_categoria){
-                    $conteudo->setCategoria($existe_categoria);
-                } else {
-//                    $conteudo->setCategoria($categoria);
-                }
+                $conteudo->setCategoria($categoria);
                 $em->persist($conteudo);
                 $em->flush();
+                $conteudos++;
             }
-//            unset($conteudo);
-//            unset($categoria);
+            unset($conteudo);
+            unset($categoria);
         }
 
-//        $output->writeln('Command result.');
+        $output->writeln("Encontrados: {$encontrados}, cadastrados: {$conteudos}");
     }
     
     function faixa()
     {
-        $inicio = new \DateTime('2016-08-09T00:00:00');
+        $inicio = new \DateTime('2016-08-11T00:00:00');
         $agora = new \DateTime;
         $diff = $agora->diff($inicio);
         $x = $diff->days;
-        $x = 3;
-        $prazo = 365;
+        $prazo = 90;
         $dias = $prazo * $x;
         
         $faixa_inicio = new \DateTime;

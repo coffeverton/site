@@ -100,10 +100,10 @@ class Categoria
         return $this->chave;
     }
     
-    private function formatarChave($chave)
+    public function formatarChave($chave)
     {
         $chave = preg_replace("/[ ]{1,}/", "-", trim($chave));
-        $chave = preg_replace('/[^a-z0-9\-_]/', '', $chave);
+        $chave = preg_replace('/[^a-zA-Z0-9\-_]/', '', $chave);
         $chave = preg_replace("/-$/", "", $chave);
         $chave = strtolower(substr($chave, 0, 32));
         return $chave;
