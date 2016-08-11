@@ -10,6 +10,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 
 use SiteBundle\Entity\Conteudo;
+use SiteBundle\Entity\Categoria;
+use SiteBundle\Repository\CategoriaRepository;
 
 
 class BlogspotImportarCommand extends ContainerAwareCommand
@@ -44,21 +46,56 @@ class BlogspotImportarCommand extends ContainerAwareCommand
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManagerForClass($class);
         
+        $conteudo_repository = $container->get('doctrine')->getRepository('SiteBundle:Conteudo');  
+        $categoria_repository = $container->get('doctrine')->getRepository('SiteBundle:Categoria');  
+        
         $posts = $this->buscar();
         
         foreach($posts->items as $post)
         {
+            
             $data = new \DateTime($post->published);
             
             $conteudo = new Conteudo();
+            $categoria = new Categoria();
+            
             $conteudo->setData($data);
             $conteudo->setTitulo($post->title);
             $conteudo->setChave($post->title);
             $conteudo->setConteudo($post->content);
             $conteudo->setAtivo(1);
             
-            $em->persist($conteudo);
-            $em->flush();
+            $existe_conteudo = $conteudo_repository->findOneByChave($conteudo->getChave());
+            
+            foreach($post->labels as $label)
+            {
+                echo "verificando {$label}:\r\n";
+                $categoria->setChave($label);
+                $existe_categoria = $categoria_repository->findOneByChave($categoria->getChave());
+                
+                if(!$existe_categoria)
+                {
+                    $categoria->setNome($label);
+                    $em->persist($categoria);
+                    $em->flush();
+                    echo "cadastrando{$label}:\r\n";
+                } else {
+                    echo "ja existe {$label}:\r\n";
+                }
+            }
+            
+            if(!$existe_conteudo){
+                
+                if($existe_categoria){
+                    $conteudo->setCategoria($existe_categoria);
+                } else {
+//                    $conteudo->setCategoria($categoria);
+                }
+                $em->persist($conteudo);
+                $em->flush();
+            }
+//            unset($conteudo);
+//            unset($categoria);
         }
 
 //        $output->writeln('Command result.');
@@ -93,7 +130,7 @@ class BlogspotImportarCommand extends ContainerAwareCommand
         
         $faixas = $this->faixa();
         
-        $url = "https://www.googleapis.com/blogger/v3/blogs/{$this->blogId}/posts?endDate={$faixas['endDate']}&startDate={$faixas['startDate']}&key={$this->key}&fields=items(id,published,title,content)";
+        $url = "https://www.googleapis.com/blogger/v3/blogs/{$this->blogId}/posts?endDate={$faixas['endDate']}&startDate={$faixas['startDate']}&key={$this->key}&fields=items(id,published,title,content,labels)";
         $posts = file_get_contents($url);
         return json_decode($posts);
     }
