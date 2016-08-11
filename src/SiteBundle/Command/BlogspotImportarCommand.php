@@ -133,6 +133,7 @@ class BlogspotImportarCommand extends ContainerAwareCommand
         $faixas['endDate'] = urlencode($faixas['endDate']);
         $faixas['startDate'] = urlencode($faixas['startDate']);
         $url = "https://www.googleapis.com/blogger/v3/blogs/{$this->blogId}/posts?endDate={$faixas['endDate']}&startDate={$faixas['startDate']}&key={$this->key}&fields=items(id,published,title,content,labels)";
+        echo "importando de {$url}:";
         $posts = file_get_contents($url);
         return json_decode($posts);
     }
