@@ -38,6 +38,7 @@ class DefaultController extends Controller
         return $this->render('site/index.html.twig',array(
                 'conteudos' => $conteudos
                 ,'categorias' => $categorias
+                ,'categoria' => $categoria
                 ,'maxPaginas' => $maxPaginas
                 ,'estaPagina' => $estaPagina
                 ,'totalConteudosRetornados' => $totalConteudosRetornados

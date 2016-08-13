@@ -13,7 +13,7 @@
         <link href="{{ app.request.getSchemeAndHttpHost ~ path('site_show', { 'chave': conteudo.chave }) }}"/>
         <id>{{ app.request.getSchemeAndHttpHost ~ path('site_show', { 'chave': conteudo.chave }) }}</id>
         <updated>{{ conteudo.data|date("c") }}</updated>
-        <summary>{{conteudo.conteudo | raw | striptags}}</summary>
+        <summary>{{conteudo.conteudo | raw }}</summary>
     </entry>
     {% endfor %}
 </feed>
