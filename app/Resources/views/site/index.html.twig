@@ -2,7 +2,7 @@
 
 {% block body %}
     {% if totalConteudosRetornados > 0%}
-    <h2>{{ categoria == '' ? '&Uacute;ltimos Conte&uacute;dos' : 'Categoria: ' ~ categoria | capitalize}}</h2>
+    <h2>{{ categoria == '' ? 'Últimos Conteúdos' : 'Categoria: ' ~ categoria | capitalize}}</h2>
     {% if categoria !='' %}
         <a class="categorias" href="{{ path('feed_categoria', {categoria:categoria}) }}" target="_blank">Feed: {{categoria}}</a>
     {% endif %}
