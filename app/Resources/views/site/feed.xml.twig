@@ -9,11 +9,11 @@
   <id>{{ app.request.getSchemeAndHttpHost ~ app.request.baseUrl}}</id>
     {% for conteudo in conteudos %}
 <entry>
-        <title>{{ conteudo.titulo }}</title>
+        <title type="html"><![CDATA[{{ conteudo.titulo }}]]></title>
         <link href="{{ app.request.getSchemeAndHttpHost ~ path('site_show', { 'chave': conteudo.chave }) }}"/>
         <id>{{ app.request.getSchemeAndHttpHost ~ path('site_show', { 'chave': conteudo.chave }) }}</id>
         <updated>{{ conteudo.data|date("c") }}</updated>
-        <summary>{{conteudo.conteudo | raw }}</summary>
+        <summary type="html"><![CDATA[{{conteudo.conteudo | raw }}]]></summary>
     </entry>
     {% endfor %}
 </feed>
