@@ -153,6 +153,11 @@ class Categoria
         return $this->conteudos;
     }
     
+    public function getNConteudos()
+    {
+        return count($this->getConteudos());
+    }
+    
     public function __toString() {
         return $this->getNome();
     }

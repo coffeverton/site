@@ -15,6 +15,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Nome</th>
+                    <th>Posts</th>
                     <th>Chave</th>
                     <th>Actions</th>
                 </tr>
@@ -24,6 +25,7 @@
                 <tr>
                     <td><a href="{{ path('painel_categoria_show', { 'id': categorium.id }) }}">{{ categorium.id }}</a></td>
                     <td>{{ categorium.nome }}</td>
+                    <td>{{ categorium.getNConteudos() }}</td>
                     <td>{{ categorium.chave }}</td>
                     <td>
                         <a href="{{ path('painel_categoria_show', { 'id': categorium.id }) }}" class="btn btn-primary">Ver</a>

@@ -10,4 +10,21 @@ namespace SiteBundle\Repository;
  */
 class CategoriaRepository extends \Doctrine\ORM\EntityRepository
 {
+    /*public function findAllNotEmpty()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p FROM SiteBundle:Categoria p, SiteBundle:Conteudo c'
+            )
+            ->getResult();
+    }*/
+    
+    public function findAllOrderByName()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p FROM SiteBundle:Categoria p ORDER BY p.nome'
+            )
+            ->getResult();
+    }
 }

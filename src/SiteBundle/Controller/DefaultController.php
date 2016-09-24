@@ -51,9 +51,18 @@ class DefaultController extends Controller
     private function getConteudo($pagina = 1, $limite = 20, $categoria = ''){
         $em = $this->getDoctrine()->getManager();
         $conteudos = $em->getRepository('SiteBundle:Conteudo')->getAllConteudo($pagina, $limite, $categoria); // Returns 5 conteudos out of 20
-        $categorias = $em->getRepository('SiteBundle:Categoria')->findAll();
+        $categorias = $em->getRepository('SiteBundle:Categoria')->findAllOrderByName();
         
-        return array('conteudos' => $conteudos, 'categorias' => $categorias);
+        $arr_cat = array();
+        foreach($categorias as $categoria)
+        {
+            if($categoria->getNConteudos() > 0)
+            {
+                $arr_cat[] = $categoria;
+            }
+        }
+        
+        return array('conteudos' => $conteudos, 'categorias' => $arr_cat);
     }
     
     /**

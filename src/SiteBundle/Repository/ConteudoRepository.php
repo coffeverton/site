@@ -30,10 +30,12 @@ class ConteudoRepository extends \Doctrine\ORM\EntityRepository
                 ->leftJoin('p.categoria', 'categoria')
                 ->orderBy('p.id', 'DESC');
         
+        $builder->where('p.ativo = 1');
+        
         if($categoria <> '')
         {
             $builder
-                ->where('categoria.chave = :categoria')
+                ->andWhere('categoria.chave = :categoria')
                 ->setParameter('categoria', $categoria);
         }
         
