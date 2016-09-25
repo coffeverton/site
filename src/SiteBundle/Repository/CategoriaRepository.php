@@ -23,7 +23,7 @@ class CategoriaRepository extends \Doctrine\ORM\EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT p FROM SiteBundle:Categoria p ORDER BY p.nome'
+                'SELECT p FROM SiteBundle:Categoria p INNER JOIN p.conteudos' //p.conteudos é o nome da relação definida na entidade
             )
             ->getResult();
     }
