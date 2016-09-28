@@ -20,6 +20,11 @@ class DefaultController extends Controller
      */
     public function indexAction($pagina = 1, $categoria = '')
     {
+        if($categoria == '')
+        {
+            $categoria = $this->parseSubdomain();
+        }
+        
         $limite = 20;
         $dados = $this->getConteudo($pagina, $limite, $categoria);
         $conteudos = $dados['conteudos'];
@@ -95,5 +100,23 @@ class DefaultController extends Controller
                 'conteudos' => $conteudos
             )
         );
+    }
+    
+    /**
+     * verifica se o site foi chamado atraves de um subdominio
+     * se foi, retorna o subdominio, para usá-lo como filtro de categoria
+     * @return string
+     */
+    private function parseSubdomain()
+    {
+        $request = Request::createFromGlobals();
+        $arr = explode('.',$request->server->get('HTTP_HOST'));
+        if(count($arr) < 1)
+        {
+            return '';
+        } else {
+            return $arr[0];
+        }
+//        die;
     }
 }
