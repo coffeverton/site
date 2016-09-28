@@ -122,6 +122,7 @@ class DefaultController extends Controller
             );
         
         $arr = explode('.',$host);
+        print_r($arr);
         if(count($arr) < 2 || $arr[0] == 'www')
         {
             return '';
