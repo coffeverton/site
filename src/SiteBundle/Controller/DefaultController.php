@@ -111,6 +111,7 @@ class DefaultController extends Controller
     {
         $request = Request::createFromGlobals();
         $arr = explode('.',$request->server->get('HTTP_HOST'));
+        print_r($arr);
         if(count($arr) < 2 || $arr[0] == 'www')
         {
             return '';
