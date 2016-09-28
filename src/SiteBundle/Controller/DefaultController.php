@@ -111,12 +111,11 @@ class DefaultController extends Controller
     {
         $request = Request::createFromGlobals();
         $arr = explode('.',$request->server->get('HTTP_HOST'));
-        if(count($arr) < 1)
+        if(count($arr) < 2)
         {
             return '';
         } else {
             return $arr[0];
         }
-//        die;
     }
 }
