@@ -110,7 +110,18 @@ class DefaultController extends Controller
     private function parseSubdomain()
     {
         $request = Request::createFromGlobals();
-        $arr = explode('.',$request->server->get('HTTP_HOST'));
+        $host = str_replace(
+                array(
+                    'www'
+                    ,'phpdev'
+                    ,'pro'
+                    ,'br'
+                )
+                , ''
+                , $request->server->get('HTTP_HOST')
+            );
+        
+        $arr = explode('.',$host);
         print_r($arr);
         if(count($arr) < 2 || $arr[0] == 'www')
         {
