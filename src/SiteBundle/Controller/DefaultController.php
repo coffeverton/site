@@ -113,9 +113,9 @@ class DefaultController extends Controller
         $host = str_replace(
                 array(
                     'www'
-                    ,'.phpdev'
-                    ,'.pro'
-                    ,'.br'
+                    ,'phpdev'
+                    ,'pro'
+                    ,'br'
                 )
                 , ''
                 , $request->server->get('HTTP_HOST')
