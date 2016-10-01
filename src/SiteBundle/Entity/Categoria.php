@@ -155,7 +155,7 @@ class Categoria
     
     public function getNConteudos()
     {
-        return count($this->getConteudos());
+        return 1;
     }
     
     public function __toString() {

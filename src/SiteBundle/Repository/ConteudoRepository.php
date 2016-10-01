@@ -23,7 +23,7 @@ class ConteudoRepository extends \Doctrine\ORM\EntityRepository
     *
     * @return \Doctrine\ORM\Tools\Pagination\Paginator
     */
-    public function getAllConteudo($pagina = 1, $limit = 5, $categoria = '')
+    public function getAllConteudo($pagina = 1, $limit = 5, $categoria = '', $pesquisar = false)
     {
         // Create our query
         $builder = $this->createQueryBuilder('p')
@@ -37,6 +37,17 @@ class ConteudoRepository extends \Doctrine\ORM\EntityRepository
             $builder
                 ->andWhere('categoria.chave = :categoria')
                 ->setParameter('categoria', $categoria);
+        }
+        
+        if($pesquisar !== false)
+        {
+            $builder
+                ->andWhere("categoria.chave LIKE :busca "
+                        . "OR categoria.nome LIKE :busca "
+                        . "OR p.titulo LIKE :busca "
+                        . "OR p.conteudo LIKE :busca "
+                        . " ")
+                ->setParameter('busca', '%'.(($pesquisar)).'%');
         }
         
         $query      = $builder->getQuery();

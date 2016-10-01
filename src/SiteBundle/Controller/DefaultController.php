@@ -18,7 +18,7 @@ class DefaultController extends Controller
      * @Route("/pagina/{pagina}", name="site_index_paginacao")
      * @Route("/categoria/{categoria}", name="site_index_categoria")
      */
-    public function indexAction($pagina = 1, $categoria = '')
+    public function indexAction($pagina = 1, $categoria = '', $pesquisar = false)
     {
         if($categoria == '')
         {
@@ -26,7 +26,7 @@ class DefaultController extends Controller
         }
         
         $limite = 20;
-        $dados = $this->getConteudo($pagina, $limite, $categoria);
+        $dados = $this->getConteudo($pagina, $limite, $categoria, $pesquisar);
         $conteudos = $dados['conteudos'];
         $categorias = $dados['categorias'];
 
@@ -41,7 +41,8 @@ class DefaultController extends Controller
         $estaPagina = $pagina;
         
         return $this->render('site/index.html.twig',array(
-                'conteudos' => $conteudos
+                'pagina' => 'index'
+                ,'conteudos' => $conteudos
                 ,'categorias' => $categorias
                 ,'categoria' => $categoria
                 ,'maxPaginas' => $maxPaginas
@@ -53,9 +54,9 @@ class DefaultController extends Controller
     /*
      * busca o conteudo
      */
-    private function getConteudo($pagina = 1, $limite = 20, $categoria = ''){
+    private function getConteudo($pagina = 1, $limite = 20, $categoria = '', $pesquisar = false){
         $em = $this->getDoctrine()->getManager();
-        $conteudos = $em->getRepository('SiteBundle:Conteudo')->getAllConteudo($pagina, $limite, $categoria); // Returns 5 conteudos out of 20
+        $conteudos = $em->getRepository('SiteBundle:Conteudo')->getAllConteudo($pagina, $limite, $categoria, $pesquisar); // Returns 5 conteudos out of 20
         $categorias = $em->getRepository('SiteBundle:Categoria')->findAllOrderByName();
         
         $arr_cat = array();
@@ -67,7 +68,10 @@ class DefaultController extends Controller
             }
         }
         
-        return array('conteudos' => $conteudos, 'categorias' => $arr_cat);
+        return array(
+                 'conteudos' => $conteudos
+                , 'categorias' => $arr_cat
+            );
     }
     
     /**
@@ -79,8 +83,12 @@ class DefaultController extends Controller
      */
     public function showAction(Conteudo $conteudo)
     {
+        $categorias[] = $conteudo->getCategoria();
+        $categorias[0]->getNome(); //apenas para "hidratar" a entidade categoria
         return $this->render('site/show.html.twig', array(
-            'conteudo' => $conteudo
+            'pagina' => 'artigo'
+            ,'conteudo' => $conteudo
+            ,'categorias' => $categorias
         ));
     }
     /**
@@ -100,6 +108,16 @@ class DefaultController extends Controller
                 'conteudos' => $conteudos
             )
         );
+    }
+    
+    /**
+     * @Route("/buscar", name="buscar")
+     */
+    public function buscarAction(Request $request)
+    {
+        $pesquisar = $request->query->get('palavra_chave');
+        
+        return $this->indexAction($pagina = 1, '', $pesquisar);
     }
     
     /**
