@@ -18,6 +18,7 @@
                     <th>Categoria</th>
                     <th>Ativo</th>
                     <th>Data</th>
+                    <th>Votos</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -29,6 +30,7 @@
                     <td>{{ conteudo.categoria }}</td>
                     <td>{% if conteudo.ativo %}Yes{% else %}No{% endif %}</td>
                     <td>{{ conteudo.data|date('Y-m-d H:i:s') }}</td>
+                    <td>{{ conteudo.getVotos() }}</td>
                     <td>
                         <a href="{{ path('painel_conteudo_show', { 'id': conteudo.id }) }}" class="btn btn-primary">Ver</a>
                         <a href="{{ path('painel_conteudo_edit', { 'id': conteudo.id }) }}" class="btn btn-success">Editar</a>

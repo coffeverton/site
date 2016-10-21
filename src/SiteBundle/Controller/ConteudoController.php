@@ -27,7 +27,8 @@ class ConteudoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $conteudos = $em->getRepository('SiteBundle:Conteudo')->findAll();
+//        $conteudos = $em->getRepository('SiteBundle:Conteudo')->findAll();
+        $conteudos = $em->getRepository('SiteBundle:Conteudo')->findBy(array(),  array('id' => 'DESC')); //ordem inversa
 
         return $this->render('conteudo/index.html.twig', array(
             'conteudos' => $conteudos,

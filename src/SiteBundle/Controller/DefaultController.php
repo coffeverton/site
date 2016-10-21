@@ -148,4 +148,23 @@ class DefaultController extends Controller
             return $arr[0];
         }
     }
+    
+    /**
+     * Vota em um conteudo.
+     *
+     * @Route("/{id}", name="conteudo_votar")
+     * @Method("GET")
+     */
+    public function votarAction(Conteudo $conteudo)
+    {
+        $conteudo->votar();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($conteudo);
+        $em->flush();
+        
+        return $this->render('site/artigo_voto.html.twig',array(
+                'conteudo' => $conteudo
+            )
+        );
+    }
 }

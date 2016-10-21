@@ -134,7 +134,9 @@ class Conteudo
     public function getConteudo()
     {
         if ($this->conteudo != '')
-        return stream_get_contents($this->conteudo);
+        {
+            return stream_get_contents($this->conteudo);
+        }
     }
 
     /**
@@ -213,6 +215,37 @@ class Conteudo
     public function getCategoria()
     {
         return $this->categoria;
+    }
+    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="votos", type="integer", nullable=true)
+     */
+    private $votos;
+    
+    /**
+     * Get votos
+     *
+     * @return int
+     */
+    public function getVotos()
+    {
+        return $this->votos;
+    }
+
+    /**
+     * Votar
+     *
+     * @param string $titulo
+     *
+     * @return Conteudo
+     */
+    public function votar()
+    {
+        $this->votos++;
+
+        return $this->votos;
     }
     
 }

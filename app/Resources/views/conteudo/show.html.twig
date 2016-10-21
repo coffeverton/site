@@ -26,6 +26,10 @@
                     <td>{% if conteudo.ativo %}Yes{% else %}No{% endif %}</td>
                 </tr>
                 <tr>
+                    <th>Votos</th>
+                    <td>{{ conteudo.getVotos() }}</td>
+                </tr>
+                <tr>
                     <th>Data</th>
                     <td>{{ conteudo.data|date('Y-m-d H:i:s') }}</td>
                 </tr>
