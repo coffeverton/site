@@ -31,7 +31,7 @@ class Conteudo
     /**
      * @var string
      *
-     * @ORM\Column(name="conteudo", type="blob")
+     * @ORM\Column(name="conteudo", type="text")
      */
     private $conteudo;
 

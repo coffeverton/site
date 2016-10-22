@@ -152,11 +152,16 @@ class DefaultController extends Controller
     /**
      * Vota em um conteudo.
      *
-     * @Route("/{id}", name="conteudo_votar")
+     * o parametro $metodo serve para que, no caso de robos acessarem o link, nao ocorra o voto.
+     * @Route("/{id}/{metodo}", name="conteudo_votar")
      * @Method("GET")
      */
-    public function votarAction(Conteudo $conteudo)
+    public function votarAction(Conteudo $conteudo, $metodo='')
     {
+        if($metodo!='ajax')
+        {
+            die;
+        }
         $conteudo->votar();
         $em = $this->getDoctrine()->getManager();
         $em->persist($conteudo);

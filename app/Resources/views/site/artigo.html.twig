@@ -50,7 +50,7 @@
                 $('.conteudo_votar').click(function(e){
                     e.preventDefault();
                     var el = $(this);
-                    $.get($(this).attr('href'), function(data){
+                    $.get($(this).attr('href')+'&method=ajax', function(data){
                         var parents = el.parents('p:first');
                         parents.find('.conteudo_votos').slideUp().remove();
                         parents.append(
