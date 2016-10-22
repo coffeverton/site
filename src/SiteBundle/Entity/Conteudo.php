@@ -133,10 +133,11 @@ class Conteudo
      */
     public function getConteudo()
     {
-        if ($this->conteudo != '')
+        return $this->conteudo;
+        /*if ($this->conteudo != '')
         {
             return stream_get_contents($this->conteudo);
-        }
+        }*/
     }
 
     /**
