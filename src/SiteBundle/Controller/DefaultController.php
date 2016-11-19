@@ -153,7 +153,7 @@ class DefaultController extends Controller
      * Vota em um conteudo.
      *
      * o parametro $metodo serve para que, no caso de robos acessarem o link, nao ocorra o voto.
-     * @Route("/{id}/{metodo}", name="conteudo_votar")
+     * @Route("votar/{id}/{metodo}", name="conteudo_votar")
      * @Method("GET")
      */
     public function votarAction(Conteudo $conteudo, $metodo='')

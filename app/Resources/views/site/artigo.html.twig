@@ -10,7 +10,7 @@
         <span itemprop="author" itemscope itemtype="https://schema.org/Person">
             Por <span itemprop="name">Everton Amaral Pereira</span>
         </span>
-        {% if pagina == 'artigo' %}
+        
         <p>
             <a target="_blank" id="conteudo_votar" class="conteudo_votar" href="{{ path('conteudo_votar', { 'id': conteudo.id}) }}">Isso ajudou?</a>
             {% if conteudo.getVotos() > 0 %}
@@ -19,7 +19,7 @@
                 </span>
             {% endif %}
         </p>
-        {% endif %}
+        
         <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
             <meta itemprop="name" content="Everton Corp.">
             <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
@@ -44,22 +44,7 @@
             (d.head || d.body).appendChild(s);
         })();
         </script>
-        <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
-        <script>
-            $(function(){
-                $('.conteudo_votar').click(function(e){
-                    e.preventDefault();
-                    var el = $(this);
-                    $.get($(this).attr('href')+'&method=ajax', function(data){
-                        var parents = el.parents('p:first');
-                        parents.find('.conteudo_votos').slideUp().remove();
-                        parents.append(
-                            $('<span>').addClass('conteudo_votos').text(data+'x')
-                        );
-                    });
-                });
-            });
-        </script>
+        
         {% else %}
             <a href="{{ path('site_show', { 'chave': conteudo.chave }) }}#disqus_thread" itemprop="url">Comentarios</a>
         {% endif %}
