@@ -1,3 +1,7 @@
+arquivos:
+    resource: "@ArquivosBundle/Controller/"
+    type:     annotation
+    prefix:   /
 site:
     resource: "@SiteBundle/Controller/"
     type:     annotation

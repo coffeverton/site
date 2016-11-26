@@ -36,3 +36,8 @@ ul.acoes li{
     font-size: 18px;
     
 }
+
+.img_miniatura{
+    max-width: 200px;
+    max-height: 200px;
+}

@@ -46,7 +46,6 @@ class ConteudoController extends Controller
         $conteudo = new Conteudo();
         $conteudo->setData(new \DateTime); //data padrao
         
-        
         $form = $this->createForm('SiteBundle\Form\ConteudoType', $conteudo);
         $form->handleRequest($request);
 

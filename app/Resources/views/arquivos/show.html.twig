@@ -1,0 +1,49 @@
+{% extends 'painel.html.twig' %}
+
+{% block body %}
+    <div class="page-header">
+        <h1>Arquivo</h1>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Visualizando Arquivo</div>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ arquivo.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nome</th>
+                    <td>{{ arquivo.nome }}</td>
+                </tr>
+                <tr>
+                    <th>Arquivo</th>
+                    <td>
+                        <a href="{{ asset('uploads/arquivos/') }}{{arquivo.arquivo}}" target="_blank">
+                            <img class="img_miniatura" src="{{ asset('uploads/arquivos/') }}{{arquivo.arquivo}}" />
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Data</th>
+                    <td>{{ arquivo.data|date('Y-m-d H:i:s') }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ul class="acoes">
+        <li>
+            <a href="{{ path('painel_arquivo_index') }}" class="btn btn-primary">Voltar</a>
+        </li>
+        <li>
+            <a href="#" class="btn btn-success">Editar</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Excluir"  class="btn btn-danger">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

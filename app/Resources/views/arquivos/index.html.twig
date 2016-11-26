@@ -1,0 +1,45 @@
+{% extends 'painel.html.twig' %}
+
+{% block body %}
+    <div class="page-header">
+        <h1>Arquivos</h1>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Listando Arquivos</div>
+        <div class="panel-body">
+            <a href="{{ path('painel_arquivo_new') }}" class="btn btn-success">Criar Novo</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Data</th>
+                    <th>Arquivo</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for arquivo in arquivos %}
+                <tr>
+                    <td><a href="">{{ arquivo.id }}</a></td>
+                    <td>{{ arquivo.nome }}</td>
+                    <td>{{ arquivo.data|date('Y-m-d H:i:s') }}</td>
+                    <td>
+                        <a href="{{ asset('uploads/arquivos/') }}{{arquivo.arquivo}}" target="_blank">
+                            <img class="img_miniatura" src="{{ asset('uploads/arquivos/') }}{{arquivo.arquivo}}" />
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ path('painel_arquivo_show', { 'id': arquivo.id }) }}" class="btn btn-primary">Ver</a>
+                        <a href="{{ path('painel_arquivo_edit', { 'id': arquivo.id }) }}" class="btn btn-success">Editar</a>
+                        <a href="{{ path('painel_arquivo_delete', { 'id': arquivo.id }) }}" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+{% endblock %}
