@@ -89,6 +89,23 @@ class DefaultController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+    /**
+     * Finds and displays a Arquivo file.
+     *
+     * @Route("/arquivos/{id}", name="arquivo_show")
+     * @Method("GET")
+     */
+    public function showFileAction(Arquivo $arquivo)
+    {
+        if($arquivo){
+            $file = new File($this->getParameter('arquivos_directory').'/'.$arquivo->getArquivo());
+            header('Content-Type: '.$file->getMimeType());
+//            header('Content-Disposition: attachment; filename="'.$arquivo->getNome().'";'); //forçar download
+            header('Content-Transfer-Encoding: binary');
+            header('Content-Length: '.$file->getSize());
+            readfile($this->getParameter('arquivos_directory').'/'.$arquivo->getArquivo());
+        }
+    }
 
     /**
      * Displays a form to edit an existing Arquivo entity.

@@ -12,7 +12,7 @@
         </span>
         
         <p>
-            <a target="_blank" id="conteudo_votar" class="conteudo_votar" href="{{ path('conteudo_votar', { 'id': conteudo.id}) }}">Isso ajudou?</a>
+            <a target="_blank" rel="nofollow" id="conteudo_votar" class="conteudo_votar" href="{{ path('conteudo_votar', { 'id': conteudo.id}) }}">Isso ajudou?</a>
             {% if conteudo.getVotos() > 0 %}
                 <span class="conteudo_votos">
                     {{conteudo.getVotos()}}x
