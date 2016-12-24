@@ -9,7 +9,9 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    base_url: 'http://site/'
     arquivos_directory: '%kernel.root_dir%/../web/uploads/arquivos'
+    arquivos_url: 'uploads/arquivos/'
 
 framework:
     #esi:             ~
