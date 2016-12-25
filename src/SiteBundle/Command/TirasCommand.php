@@ -100,8 +100,11 @@ class TirasCommand extends ContainerAwareCommand
             $em_arquivo->flush();
 
             $url_conteudo = $this->getContainer()->getParameter('base_url')
-                    .$this->getContainer()->getParameter('arquivos_url')
-                    .$imagem->getArquivo();
+                    .'arquivos/'
+                    .$imagem->getId();
+//            $url_conteudo = $this->getContainer()->getParameter('base_url')
+//                    .$this->getContainer()->getParameter('arquivos_url')
+//                    .$imagem->getArquivo();
             $conteudo->setConteudo("<img src='{$url_conteudo}'>");
             
             $em->persist($conteudo);
