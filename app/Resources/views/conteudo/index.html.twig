@@ -13,12 +13,36 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Titulo</th>
-                    <th>Categoria</th>
-                    <th>Ativo</th>
-                    <th>Data</th>
-                    <th>Votos</th>
+                    <th>
+                        <a href="{{ path('painel_conteudo_ordenar', { 'campo': 'id' }) }}">
+                        Id
+                        </a>
+                    </th>
+                    <th>
+                        <a href="{{ path('painel_conteudo_ordenar', { 'campo': 'titulo' }) }}">
+                            Titulo
+                        </a>
+                    </th>
+                    <th>
+                        <a href="{{ path('painel_conteudo_ordenar', { 'campo': 'categoria' }) }}">
+                            Categoria
+                        </a>
+                    </th>
+                    <th>
+                        <a href="{{ path('painel_conteudo_ordenar', { 'campo': 'ativo' }) }}">
+                            Ativo
+                        </a>
+                    </th>
+                    <th>
+                        <a href="{{ path('painel_conteudo_ordenar', { 'campo': 'data' }) }}">
+                            Data
+                        </a>
+                    </th>
+                    <th>
+                        <a href="{{ path('painel_conteudo_ordenar', { 'campo': 'votos' }) }}">
+                            Votos
+                        </a>
+                    </th>
                     <th>Actions</th>
                 </tr>
             </thead>

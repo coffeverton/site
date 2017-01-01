@@ -172,4 +172,20 @@ class DefaultController extends Controller
             )
         );
     }
+    
+    /**
+     * @Route("/sobre", name="sobre")
+     */
+    public function sobreAction()
+    {
+        return $this->render('site/sobre.html.twig');
+    }
+    
+    /**
+     * @Route("/sobre_o_site", name="sobre_o_site")
+     */
+    public function siteAction()
+    {
+        return $this->render('site/sobre_o_site.html.twig');
+    }
 }

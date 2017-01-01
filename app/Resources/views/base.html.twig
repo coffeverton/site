@@ -36,21 +36,16 @@
             "https://plus.google.com/u/0/+EvertonAmaralPereira0"
           ]
         }
-
         </script>
     </head>
     <body>
         <section id="site">
             <nav id="navegacao_topo">
                 <ul>
-                    <!--li><a class="inicio" href="{{ path('site_index') }}">Inicio</a></li-->
                     <li><a class="inicio" href="{{ base_url }}">Inicio</a></li>
-                    {% for categoria in categorias %}
-                    <li>
-                        <!--a class="categorias" href="{{ path('site_index_categoria', {categoria:categoria.chave}) }}">{{categoria.nome}}</a-->
-                        <a class="categorias" href="http://{{ categoria.chave }}.phpdev.pro.br">{{categoria.nome}}</a>
-                    </li>
-                    {% endfor %}
+                    <li><a class="inicio" href="{{ path('sobre') }}">Sobre</a></li>
+                    <li><a class="inicio" href="{{ path('sobre_o_site') }}">Site Sem Nome</a></li>
+                    <li><a href="{{ path('feed_default') }}">Feed (Atom)</a></li>
                 </ul>
             </nav>
             <nav id="pesquisa_topo">
@@ -60,11 +55,23 @@
                 </form>
             </nav>
             {% block body %}{% endblock %}
+            {% if categoria is defined %}
             <nav id="navegacao_rodape">
                 <ul>
-                    <li><a href="{{ path('site_index') }}">Inicio</a></li>
-                    <li><a href="{{ path('feed_default') }}">Feed (Atom)</a></li>
+                    <li>
+                        <span>Categorias</span>
+                        <ul>
+                            <!--li><a class="inicio" href="{{ path('site_index') }}">Inicio</a></li-->
+                            {% for categoria in categorias %}
+                            <li>
+                                <a class="categorias" href="{{ path('site_index_categoria', {categoria:categoria.chave}) }}">{{categoria.nome}}</a>
+                                <!--a class="categorias" href="http://{{ categoria.chave }}.phpdev.pro.br">{{categoria.nome}}</a-->
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
                 </ul>
+            {% endif %}
             </nav>
             {% block javascripts %}{% endblock %}
         </section>

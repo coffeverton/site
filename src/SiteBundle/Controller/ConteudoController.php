@@ -21,14 +21,15 @@ class ConteudoController extends Controller
      * Lists all Conteudo entities.
      *
      * @Route("/", name="painel_conteudo_index")
+     * @Route("/ordenar/{campo}/{ordem}", name="painel_conteudo_ordenar", defaults={"campo" = "id", "ordem" = "DESC"})
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction($campo = 'id', $ordem = 'DESC')
     {
         $em = $this->getDoctrine()->getManager();
 
 //        $conteudos = $em->getRepository('SiteBundle:Conteudo')->findAll();
-        $conteudos = $em->getRepository('SiteBundle:Conteudo')->findBy(array(),  array('id' => 'DESC')); //ordem inversa
+        $conteudos = $em->getRepository('SiteBundle:Conteudo')->findBy(array(),  array($campo => $ordem)); //ordem inversa
 
         return $this->render('conteudo/index.html.twig', array(
             'conteudos' => $conteudos,
