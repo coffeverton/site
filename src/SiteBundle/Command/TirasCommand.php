@@ -79,6 +79,12 @@ class TirasCommand extends ContainerAwareCommand
             fwrite($handle, file_get_contents($url_imagem));
             fclose($handle);
 
+            if(filesize($temp) == 0)
+            {
+                $output->writeln("Arquivo nao encontrado!");
+                return false;
+            }
+            
             $arquivo = new File($temp);
             
             $fileName = md5(uniqid()).'.'.$arquivo->guessExtension();
