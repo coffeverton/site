@@ -20,7 +20,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager('arquivos');
 
-        $arquivos = $em->getRepository('ArquivosBundle:Arquivo')->findAll();
+        $arquivos = $em->getRepository('ArquivosBundle:Arquivo')->findBy(array(),  array('id' => 'DESC'));
 
         return $this->render('arquivos/index.html.twig', array(
             'arquivos' => $arquivos,
