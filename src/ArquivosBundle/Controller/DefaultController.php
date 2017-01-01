@@ -9,6 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use ArquivosBundle\Entity\Arquivo;
 use Symfony\Component\HttpFoundation\File\File;
 
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+
 
 class DefaultController extends Controller
 {
@@ -98,12 +101,23 @@ class DefaultController extends Controller
     public function showFileAction(Arquivo $arquivo)
     {
         if($arquivo){
-            $file = new File($this->getParameter('arquivos_directory').'/'.$arquivo->getArquivo());
-            header('Content-Type: '.$file->getMimeType());
-//            header('Content-Disposition: attachment; filename="'.$arquivo->getNome().'";'); //forçar download
-            header('Content-Transfer-Encoding: binary');
-            header('Content-Length: '.$file->getSize());
-            readfile($this->getParameter('arquivos_directory').'/'.$arquivo->getArquivo());
+//            $file = new File($this->getParameter('arquivos_directory').'/'.$arquivo->getArquivo());
+//            header('Content-Type: '.$file->getMimeType());
+////            header('Content-Disposition: attachment; filename="'.$arquivo->getNome().'";'); //forçar download
+//            header('Content-Transfer-Encoding: binary');
+//            header('Content-Length: '.$file->getSize());
+//            readfile($this->getParameter('arquivos_directory').'/'.$arquivo->getArquivo());
+            
+            $fileContent = readfile($this->getParameter('arquivos_directory').'/'.$arquivo->getArquivo());
+            $response = new Response($fileContent);
+
+            $disposition = $response->headers->makeDisposition(
+                ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+                $arquivo->getNome()
+            );
+
+            $response->headers->set('Content-Disposition', $disposition);
+            return $response;
         }
     }
 
