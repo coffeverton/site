@@ -79,8 +79,8 @@ class DefaultController extends Controller
      *
      * @Route("/{id}", name="site_show")
      * @Route("/conteudo/{chave}", name="site_show")
-     * @Route("/sobre", name="sobre", defaults={"id" = "167"})
-     * @Route("/sobre_o_site", name="sobre_o_site", defaults={"id" = "168"})
+     * @Route("/sobre", name="sobre", defaults={"chave" = "sobre_o_autor"})
+     * @Route("/sobre_o_site", name="sobre_o_site", defaults={"chave" = "sobre_o_site"})
      * @Method("GET")
      */
     public function showAction(Conteudo $conteudo)
