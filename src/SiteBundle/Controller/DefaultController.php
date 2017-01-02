@@ -79,6 +79,8 @@ class DefaultController extends Controller
      *
      * @Route("/{id}", name="site_show")
      * @Route("/conteudo/{chave}", name="site_show")
+     * @Route("/sobre", name="sobre", defaults={"id" = "167"})
+     * @Route("/sobre_o_site", name="sobre_o_site", defaults={"id" = "168"})
      * @Method("GET")
      */
     public function showAction(Conteudo $conteudo)
@@ -171,21 +173,5 @@ class DefaultController extends Controller
                 'conteudo' => $conteudo
             )
         );
-    }
-    
-    /**
-     * @Route("/sobre", name="sobre")
-     */
-    public function sobreAction()
-    {
-        return $this->render('site/sobre.html.twig');
-    }
-    
-    /**
-     * @Route("/sobre_o_site", name="sobre_o_site")
-     */
-    public function siteAction()
-    {
-        return $this->render('site/sobre_o_site.html.twig');
     }
 }
