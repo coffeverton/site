@@ -83,12 +83,18 @@
                 $('.conteudo_votar').click(function(e){
                     e.preventDefault();
                     var el = $(this);
-                    $.get($(this).attr('href')+'/ajax', function(data){
+                    $.get(el.attr('href')+'/ajax', function(data){
                         var parents = el.parents('p:first');
                         parents.find('.conteudo_votos').slideUp().remove();
                         parents.append(
                             $('<span>').addClass('conteudo_votos').text(data+'x')
                         );
+                        var eventCategory = 'Artigo';
+                        var eventAction = 'Voto';
+                        var eventLabel = el.attr('data-label');
+                        var eventValue = el.attr('data-id');
+                        ga('send', 'event', eventCategory, eventAction, eventLabel, eventValue);
+
                     });
                 });
             });
